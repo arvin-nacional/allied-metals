@@ -488,6 +488,7 @@ export interface Page {
     | MilestonesBlock
     | ServiceDetailBlock
     | TestimonialsBlock
+    | ClientOverviewBlock
   )[];
   meta?: {
     title?: string | null;
@@ -1007,6 +1008,25 @@ export interface TestimonialsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ClientOverviewBlock".
+ */
+export interface ClientOverviewBlock {
+  heading?: string | null;
+  description?: string | null;
+  clientCategories?:
+    | {
+        icon: 'hotels' | 'hospitals' | 'foodchain' | 'restaurants' | 'education' | 'corporate';
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'clientOverviewBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1308,6 +1328,7 @@ export interface PagesSelect<T extends boolean = true> {
         milestonesBlock?: T | MilestonesBlockSelect<T>;
         serviceDetailBlock?: T | ServiceDetailBlockSelect<T>;
         testimonialsBlock?: T | TestimonialsBlockSelect<T>;
+        clientOverviewBlock?: T | ClientOverviewBlockSelect<T>;
       };
   meta?:
     | T
@@ -1651,6 +1672,24 @@ export interface TestimonialsBlockSelect<T extends boolean = true> {
         company?: T;
         rating?: T;
         initials?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ClientOverviewBlock_select".
+ */
+export interface ClientOverviewBlockSelect<T extends boolean = true> {
+  heading?: T;
+  description?: T;
+  clientCategories?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        description?: T;
         id?: T;
       };
   id?: T;

@@ -19,6 +19,7 @@ import { TeamMembersBlock } from '../../blocks/TeamMembersBlock/config'
 import { MilestonesBlock } from '../../blocks/MilestonesBlock/config'
 import { ServiceDetailBlock } from '../../blocks/ServiceDetailBlock/config'
 import { TestimonialsBlock } from '../../blocks/TestimonialsBlock/config'
+import { ClientOverviewBlock } from '../../blocks/ClientOverviewBlock/config'
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -105,6 +106,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 MilestonesBlock,
                 ServiceDetailBlock,
                 TestimonialsBlock,
+                ClientOverviewBlock,
               ],
               required: true,
               admin: {
