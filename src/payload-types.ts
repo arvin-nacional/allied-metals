@@ -484,6 +484,9 @@ export interface Page {
     | MissionVisionBlock
     | StoryBlock
     | TeamMembersBlock
+    | MilestonesBlock
+    | ServiceDetailBlock
+    | TestimonialsBlock
   )[];
   meta?: {
     title?: string | null;
@@ -937,6 +940,72 @@ export interface TeamMembersBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MilestonesBlock".
+ */
+export interface MilestonesBlock {
+  title: string;
+  description?: string | null;
+  milestones?:
+    | {
+        year: string;
+        title: string;
+        description: string;
+        image: string | Media;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'milestonesBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServiceDetailBlock".
+ */
+export interface ServiceDetailBlock {
+  title: string;
+  description?: string | null;
+  additionalText?: string | null;
+  backgroundColorClass?: ('bg-[#081632]' | 'bg-[#0a1a3a]' | 'bg-[#050f22]' | '') | null;
+  imagePosition?: ('right' | 'left') | null;
+  features?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  image: string | Media;
+  buttonText?: string | null;
+  buttonLink?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'serviceDetailBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialsBlock".
+ */
+export interface TestimonialsBlock {
+  title: string;
+  description?: string | null;
+  backgroundColorClass?: ('bg-[#081632]' | 'bg-[#0a1a3a]' | 'bg-[#050f22]' | '') | null;
+  testimonials?:
+    | {
+        quote: string;
+        author: string;
+        role: string;
+        company?: string | null;
+        rating?: ('5' | '4' | '3' | '2' | '1') | null;
+        initials: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'testimonialsBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1234,6 +1303,9 @@ export interface PagesSelect<T extends boolean = true> {
         missionVisionBlock?: T | MissionVisionBlockSelect<T>;
         storyBlock?: T | StoryBlockSelect<T>;
         teamMembersBlock?: T | TeamMembersBlockSelect<T>;
+        milestonesBlock?: T | MilestonesBlockSelect<T>;
+        serviceDetailBlock?: T | ServiceDetailBlockSelect<T>;
+        testimonialsBlock?: T | TestimonialsBlockSelect<T>;
       };
   meta?:
     | T
@@ -1514,6 +1586,69 @@ export interface TeamMembersBlockSelect<T extends boolean = true> {
         position?: T;
         bio?: T;
         image?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MilestonesBlock_select".
+ */
+export interface MilestonesBlockSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  milestones?:
+    | T
+    | {
+        year?: T;
+        title?: T;
+        description?: T;
+        image?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServiceDetailBlock_select".
+ */
+export interface ServiceDetailBlockSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  additionalText?: T;
+  backgroundColorClass?: T;
+  imagePosition?: T;
+  features?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  image?: T;
+  buttonText?: T;
+  buttonLink?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TestimonialsBlock_select".
+ */
+export interface TestimonialsBlockSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  backgroundColorClass?: T;
+  testimonials?:
+    | T
+    | {
+        quote?: T;
+        author?: T;
+        role?: T;
+        company?: T;
+        rating?: T;
+        initials?: T;
         id?: T;
       };
   id?: T;

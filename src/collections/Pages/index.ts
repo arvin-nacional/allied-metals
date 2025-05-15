@@ -16,6 +16,9 @@ import { CoreValuesBlock } from '../../blocks/CoreValuesBlock/config'
 import { MissionVisionBlock } from '../../blocks/MissionVisionBlock/config'
 import { StoryBlock } from '../../blocks/StoryBlock/config'
 import { TeamMembersBlock } from '../../blocks/TeamMembersBlock/config'
+import { MilestonesBlock } from '../../blocks/MilestonesBlock/config'
+import { ServiceDetailBlock } from '../../blocks/ServiceDetailBlock/config'
+import { TestimonialsBlock } from '../../blocks/TestimonialsBlock/config'
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -99,6 +102,9 @@ export const Pages: CollectionConfig<'pages'> = {
                 MissionVisionBlock,
                 StoryBlock,
                 TeamMembersBlock,
+                MilestonesBlock,
+                ServiceDetailBlock,
+                TestimonialsBlock,
               ],
               required: true,
               admin: {

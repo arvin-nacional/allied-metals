@@ -16,6 +16,9 @@ import { CoreValuesBlock } from '@/blocks/CoreValuesBlock/Component'
 import { MissionVisionBlock } from '@/blocks/MissionVisionBlock/Component'
 import { StoryBlock } from '@/blocks/StoryBlock/Component'
 import { TeamMembersBlock } from '@/blocks/TeamMembersBlock/Component'
+import { MilestonesBlock } from '@/blocks/MilestonesBlock/Component'
+import { ServiceDetailBlock } from '@/blocks/ServiceDetailBlock/Component'
+import { TestimonialsBlock } from '@/blocks/TestimonialsBlock/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -32,6 +35,9 @@ const blockComponents = {
   missionVisionBlock: MissionVisionBlock,
   storyBlock: StoryBlock,
   teamMembersBlock: TeamMembersBlock,
+  milestonesBlock: MilestonesBlock,
+  serviceDetailBlock: ServiceDetailBlock,
+  testimonialsBlock: TestimonialsBlock,
 }
 
 export const RenderBlocks: React.FC<{
