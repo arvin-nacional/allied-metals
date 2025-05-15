@@ -14,19 +14,18 @@ export const CallToAction: Block = {
   interfaceName: 'CallToActionBlock',
   fields: [
     {
-      name: 'richText',
-      type: 'richText',
-      editor: lexicalEditor({
-        features: ({ rootFeatures }) => {
-          return [
-            ...rootFeatures,
-            HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-            FixedToolbarFeature(),
-            InlineToolbarFeature(),
-          ]
-        },
-      }),
-      label: false,
+      name: 'heading',
+      type: 'text',
+      label: 'Heading',
+      required: true,
+      defaultValue: 'Ready to Transform Your Kitchen?',
+    },
+    {
+      name: 'subheading',
+      type: 'textarea',
+      label: 'Subheading',
+      required: true,
+      defaultValue: 'Contact us today to discuss your project requirements and discover how Allied Metals can deliver the perfect kitchen solution for your business.',
     },
     linkGroup({
       appearances: ['default', 'outline'],

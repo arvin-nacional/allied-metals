@@ -1,6 +1,6 @@
 // storage-adapter-import-placeholder
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
-
+import { s3Storage } from '@payloadcms/storage-s3'
 import sharp from 'sharp' // sharp-import
 import path from 'path'
 import { buildConfig, PayloadRequest } from 'payload'
@@ -13,6 +13,14 @@ import { Posts } from './collections/Posts'
 import { Users } from './collections/Users'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
+import { AboutBlockConfig } from './blocks/AboutBlock'
+import { BeliefsBlockConfig } from './blocks/BeliefsBlock'
+import { ServicesBlockConfig } from './blocks/ServicesBlock'
+import { ClientsBlockConfig } from './blocks/ClientsBlock'
+import { ProcessBlockConfig } from './blocks/ProcessBlock'
+import { missionVisionBlockConfig } from './blocks/MissionVisionBlock'
+import { coreValuesBlockConfig } from './blocks/CoreValuesBlock'
+import { storyBlockConfig } from './blocks/StoryBlock'
 import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
@@ -65,8 +73,23 @@ export default buildConfig({
   collections: [Pages, Posts, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
+  blocks: [AboutBlockConfig, BeliefsBlockConfig, ServicesBlockConfig, ClientsBlockConfig, ProcessBlockConfig, missionVisionBlockConfig, coreValuesBlockConfig, storyBlockConfig],
   plugins: [
     ...plugins,
+    s3Storage({
+      collections: {
+        media: true,
+      },
+      bucket: process.env.S3_BUCKET || '',
+      config: {
+        credentials: {
+          accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
+          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || '',
+        },
+        region: process.env.S3_REGION || '',
+        forcePathStyle: true,
+      },
+    }),
     // storage-adapter-placeholder
   ],
   secret: process.env.PAYLOAD_SECRET,

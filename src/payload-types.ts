@@ -54,6 +54,7 @@ export type SupportedTimezones =
   | 'Asia/Singapore'
   | 'Asia/Tokyo'
   | 'Asia/Seoul'
+  | 'Australia/Brisbane'
   | 'Australia/Sydney'
   | 'Pacific/Guam'
   | 'Pacific/Noumea'
@@ -64,7 +65,16 @@ export interface Config {
   auth: {
     users: UserAuthOperations;
   };
-  blocks: {};
+  blocks: {
+    aboutBlock: AboutBlock;
+    beliefsBlock: BeliefsBlock;
+    servicesBlock: ServicesBlock;
+    clientsBlock: ClientsBlock;
+    processBlock: ProcessBlock;
+    missionVisionBlock: MissionVisionBlock;
+    coreValuesBlock: CoreValuesBlock;
+    storyBlock: StoryBlock;
+  };
   collections: {
     pages: Page;
     posts: Post;
@@ -142,116 +152,26 @@ export interface UserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "pages".
+ * via the `definition` "AboutBlock".
  */
-export interface Page {
-  id: string;
-  title: string;
-  hero: {
-    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
-    richText?: {
-      root: {
-        type: string;
-        children: {
-          type: string;
-          version: number;
-          [k: string]: unknown;
-        }[];
-        direction: ('ltr' | 'rtl') | null;
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-        indent: number;
-        version: number;
-      };
-      [k: string]: unknown;
-    } | null;
-    links?:
-      | {
-          link: {
-            type?: ('reference' | 'custom') | null;
-            newTab?: boolean | null;
-            reference?:
-              | ({
-                  relationTo: 'pages';
-                  value: string | Page;
-                } | null)
-              | ({
-                  relationTo: 'posts';
-                  value: string | Post;
-                } | null);
-            url?: string | null;
-            label: string;
-            /**
-             * Choose how the link should be rendered.
-             */
-            appearance?: ('default' | 'outline') | null;
-          };
-          id?: string | null;
-        }[]
-      | null;
-    media?: (string | null) | Media;
-  };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
-  meta?: {
-    title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (string | null) | Media;
-    description?: string | null;
-  };
-  publishedAt?: string | null;
-  slug?: string | null;
-  slugLock?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "posts".
- */
-export interface Post {
-  id: string;
-  title: string;
-  heroImage?: (string | null) | Media;
-  content: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  relatedPosts?: (string | Post)[] | null;
-  categories?: (string | Category)[] | null;
-  meta?: {
-    title?: string | null;
-    /**
-     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
-     */
-    image?: (string | null) | Media;
-    description?: string | null;
-  };
-  publishedAt?: string | null;
-  authors?: (string | User)[] | null;
-  populatedAuthors?:
+export interface AboutBlock {
+  heading?: string | null;
+  subheading?: string | null;
+  description?: string | null;
+  image?: (string | null) | Media;
+  storyTitle?: string | null;
+  story?: string | null;
+  story2?: string | null;
+  stats?:
     | {
+        value: string;
+        label: string;
         id?: string | null;
-        name?: string | null;
       }[]
     | null;
-  slug?: string | null;
-  slugLock?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'aboutBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -347,6 +267,288 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BeliefsBlock".
+ */
+export interface BeliefsBlock {
+  heading?: string | null;
+  description?: string | null;
+  beliefs?:
+    | {
+        title: string;
+        description: string;
+        iconType: 'quality' | 'innovation' | 'customer' | 'sustainability' | 'team' | 'excellence';
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'beliefsBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServicesBlock".
+ */
+export interface ServicesBlock {
+  heading?: string | null;
+  description?: string | null;
+  services?:
+    | {
+        number: number;
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  galleryImages?:
+    | {
+        image: string | Media;
+        alt: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'servicesBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ClientsBlock".
+ */
+export interface ClientsBlock {
+  heading?: string | null;
+  description?: string | null;
+  clientCategories?:
+    | {
+        name: string;
+        /**
+         * Used for tab navigation. Use only lowercase letters, numbers, and hyphens.
+         */
+        slug: string;
+        isDefault?: boolean | null;
+        clientGroups?:
+          | {
+              title: string;
+              clients?:
+                | {
+                    name: string;
+                    id?: string | null;
+                  }[]
+                | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'clientsBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProcessBlock".
+ */
+export interface ProcessBlock {
+  heading?: string | null;
+  description?: string | null;
+  processSteps?:
+    | {
+        number: number;
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'processBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MissionVisionBlock".
+ */
+export interface MissionVisionBlock {
+  missionHeading?: string | null;
+  missionContent?: string | null;
+  visionHeading?: string | null;
+  visionContent?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'missionVisionBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CoreValuesBlock".
+ */
+export interface CoreValuesBlock {
+  heading?: string | null;
+  description?: string | null;
+  values?:
+    | {
+        icon: 'award' | 'shield' | 'lightbulb' | 'users' | 'clock' | 'chart';
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'coreValuesBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StoryBlock".
+ */
+export interface StoryBlock {
+  heading?: string | null;
+  paragraphs?:
+    | {
+        content: string;
+        id?: string | null;
+      }[]
+    | null;
+  image?: (string | null) | Media;
+  stats?:
+    | {
+        value: string;
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'storyBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "pages".
+ */
+export interface Page {
+  id: string;
+  title: string;
+  hero: {
+    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
+    richText?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    links?:
+      | {
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?:
+              | ({
+                  relationTo: 'pages';
+                  value: string | Page;
+                } | null)
+              | ({
+                  relationTo: 'posts';
+                  value: string | Post;
+                } | null);
+            url?: string | null;
+            label: string;
+            /**
+             * Choose how the link should be rendered.
+             */
+            appearance?: ('default' | 'outline') | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
+    media?: (string | null) | Media;
+  };
+  layout: (
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+    | AboutBlock
+    | BeliefsBlock
+    | ServicesBlock
+    | ClientsBlock
+    | ProcessBlock
+    | CoreValuesBlock
+    | MissionVisionBlock
+    | StoryBlock
+    | TeamMembersBlock
+  )[];
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posts".
+ */
+export interface Post {
+  id: string;
+  title: string;
+  heroImage?: (string | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  relatedPosts?: (string | Post)[] | null;
+  categories?: (string | Category)[] | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
+  publishedAt?: string | null;
+  authors?: (string | User)[] | null;
+  populatedAuthors?:
+    | {
+        id?: string | null;
+        name?: string | null;
+      }[]
+    | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "categories".
  */
 export interface Category {
@@ -389,21 +591,8 @@ export interface User {
  * via the `definition` "CallToActionBlock".
  */
 export interface CallToActionBlock {
-  richText?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
+  heading: string;
+  subheading: string;
   links?:
     | {
         link: {
@@ -624,6 +813,7 @@ export interface Form {
             label?: string | null;
             width?: number | null;
             defaultValue?: string | null;
+            placeholder?: string | null;
             options?:
               | {
                   label: string;
@@ -724,6 +914,26 @@ export interface Form {
     | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TeamMembersBlock".
+ */
+export interface TeamMembersBlock {
+  title: string;
+  description?: string | null;
+  teamMembers?:
+    | {
+        name: string;
+        position: string;
+        bio?: string | null;
+        image: string | Media;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'teamMembersBlock';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1015,6 +1225,15 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
+        aboutBlock?: T | AboutBlockSelect<T>;
+        beliefsBlock?: T | BeliefsBlockSelect<T>;
+        servicesBlock?: T | ServicesBlockSelect<T>;
+        clientsBlock?: T | ClientsBlockSelect<T>;
+        processBlock?: T | ProcessBlockSelect<T>;
+        coreValuesBlock?: T | CoreValuesBlockSelect<T>;
+        missionVisionBlock?: T | MissionVisionBlockSelect<T>;
+        storyBlock?: T | StoryBlockSelect<T>;
+        teamMembersBlock?: T | TeamMembersBlockSelect<T>;
       };
   meta?:
     | T
@@ -1035,7 +1254,8 @@ export interface PagesSelect<T extends boolean = true> {
  * via the `definition` "CallToActionBlock_select".
  */
 export interface CallToActionBlockSelect<T extends boolean = true> {
-  richText?: T;
+  heading?: T;
+  subheading?: T;
   links?:
     | T
     | {
@@ -1111,6 +1331,191 @@ export interface FormBlockSelect<T extends boolean = true> {
   form?: T;
   enableIntro?: T;
   introContent?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "AboutBlock_select".
+ */
+export interface AboutBlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  description?: T;
+  image?: T;
+  storyTitle?: T;
+  story?: T;
+  story2?: T;
+  stats?:
+    | T
+    | {
+        value?: T;
+        label?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BeliefsBlock_select".
+ */
+export interface BeliefsBlockSelect<T extends boolean = true> {
+  heading?: T;
+  description?: T;
+  beliefs?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        iconType?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServicesBlock_select".
+ */
+export interface ServicesBlockSelect<T extends boolean = true> {
+  heading?: T;
+  description?: T;
+  services?:
+    | T
+    | {
+        number?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  galleryImages?:
+    | T
+    | {
+        image?: T;
+        alt?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ClientsBlock_select".
+ */
+export interface ClientsBlockSelect<T extends boolean = true> {
+  heading?: T;
+  description?: T;
+  clientCategories?:
+    | T
+    | {
+        name?: T;
+        slug?: T;
+        isDefault?: T;
+        clientGroups?:
+          | T
+          | {
+              title?: T;
+              clients?:
+                | T
+                | {
+                    name?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProcessBlock_select".
+ */
+export interface ProcessBlockSelect<T extends boolean = true> {
+  heading?: T;
+  description?: T;
+  processSteps?:
+    | T
+    | {
+        number?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CoreValuesBlock_select".
+ */
+export interface CoreValuesBlockSelect<T extends boolean = true> {
+  heading?: T;
+  description?: T;
+  values?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MissionVisionBlock_select".
+ */
+export interface MissionVisionBlockSelect<T extends boolean = true> {
+  missionHeading?: T;
+  missionContent?: T;
+  visionHeading?: T;
+  visionContent?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StoryBlock_select".
+ */
+export interface StoryBlockSelect<T extends boolean = true> {
+  heading?: T;
+  paragraphs?:
+    | T
+    | {
+        content?: T;
+        id?: T;
+      };
+  image?: T;
+  stats?:
+    | T
+    | {
+        value?: T;
+        label?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TeamMembersBlock_select".
+ */
+export interface TeamMembersBlockSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  teamMembers?:
+    | T
+    | {
+        name?: T;
+        position?: T;
+        bio?: T;
+        image?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }
@@ -1355,6 +1760,7 @@ export interface FormsSelect<T extends boolean = true> {
               label?: T;
               width?: T;
               defaultValue?: T;
+              placeholder?: T;
               options?:
                 | T
                 | {
