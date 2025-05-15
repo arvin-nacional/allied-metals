@@ -468,6 +468,7 @@ export interface Page {
         }[]
       | null;
     media?: (string | null) | Media;
+    heroImage?: (string | null) | Media;
   };
   layout: (
     | CallToActionBlock
@@ -1285,6 +1286,7 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
             };
         media?: T;
+        heroImage?: T;
       };
   layout?:
     | T

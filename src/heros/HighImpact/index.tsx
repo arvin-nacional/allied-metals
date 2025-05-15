@@ -8,7 +8,7 @@ import { CMSLink } from '@/components/Link'
 import { Media } from '@/components/Media'
 import RichText from '@/components/RichText'
 
-export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText }) => {
+export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText, heroImage }) => {
   const { setHeaderTheme } = useHeaderTheme()
 
   useEffect(() => {
@@ -17,23 +17,28 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
 
   return (
     <div
-      className="relative -mt-[10.4rem] flex items-center justify-center text-white"
+      className="relative -mt-[6rem] flex items-center justify-center text-white h-[90vh]"
       data-theme="dark"
     >
-      <div className="container mb-8 z-10 relative flex items-center justify-center">
-        <div className="max-w-[36.5rem] md:text-center">
-          {richText && <RichText className="mb-6" data={richText} enableGutter={false} />}
-          {Array.isArray(links) && links.length > 0 && (
-            <ul className="flex md:justify-center gap-4">
-              {links.map(({ link }, i) => {
-                return (
-                  <li key={i}>
-                    <CMSLink {...link} />
-                  </li>
-                )
-              })}
-            </ul>
-          )}
+      <div className="container mb-8 z-10 relative flex items-center justify-start">
+        <div className="flex items-center gap-4 justify-between">
+          <div className="max-w-[700px]">
+            {richText && <RichText className="mb-6" data={richText} enableGutter={false} />}
+            {Array.isArray(links) && links.length > 0 && (
+              <ul className="flex justify-start gap-4">
+                {links.map(({ link }, i) => {
+                  return (
+                    <li key={i}>
+                      <CMSLink {...link} />
+                    </li>
+                  )
+                })}
+              </ul>
+            )}
+          </div>
+          <div className="w-1/3 rounded-md overflow-hidden">
+            {heroImage && <Media resource={heroImage} />}
+          </div>
         </div>
       </div>
       <div className="min-h-[80vh] select-none">

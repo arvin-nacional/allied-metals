@@ -14,7 +14,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
   return (
     <>
       {/* Desktop Nav */}
-      <nav className="hidden md:flex space-x-8 items-center">
+      <nav className="hidden md:flex space-x-8 items-center ">
         {navItems.map(({ link }, i) => (
           <CMSLink key={i} {...link} appearance="link" />
         ))}
