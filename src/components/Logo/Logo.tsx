@@ -22,8 +22,8 @@ export const Logo = (props: Props) => {
       loading={loading}
       fetchPriority={priority}
       decoding="async"
-      className={clsx('max-w-[9.375rem] w-full h-[34px]', className)}
-      src="https://raw.githubusercontent.com/payloadcms/payload/main/packages/ui/src/assets/payload-logo-light.svg"
+      className={clsx('w-full h-[34px]', className)}
+      src="https://allied-metals-website.s3.ap-southeast-2.amazonaws.com/AlliedMetals-LogoFINAL-Logo%2BTagline-Horizontal+1.png"
     />
   )
 }

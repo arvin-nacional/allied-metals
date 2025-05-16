@@ -1,5 +1,13 @@
 import React from 'react'
-import { Building2, HeartPulse, UtensilsCrossed, CakeSlice, Building, GraduationCap, Briefcase } from 'lucide-react'
+import {
+  Building2,
+  HeartPulse,
+  UtensilsCrossed,
+  CakeSlice,
+  Building,
+  GraduationCap,
+  Briefcase,
+} from 'lucide-react'
 
 import { ClientOverviewBlock as ClientOverviewBlockType } from '@/payload-types'
 
@@ -29,7 +37,7 @@ export const ClientOverviewBlock: React.FC<ClientOverviewBlockType> = ({
   }
 
   return (
-    <section className="py-20">
+    <section className="py-20 bg-[#0a1a3a]">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">{heading}</h2>
