@@ -489,6 +489,8 @@ export interface Page {
     | ServiceDetailBlock
     | TestimonialsBlock
     | ClientOverviewBlock
+    | CoreServicesBlock
+    | ServiceProcessBlock
   )[];
   meta?: {
     title?: string | null;
@@ -1027,6 +1029,53 @@ export interface ClientOverviewBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CoreServicesBlock".
+ */
+export interface CoreServicesBlock {
+  heading: string;
+  description: string;
+  services?:
+    | {
+        title: string;
+        description: string;
+        iconType:
+          | 'PenTool'
+          | 'Users'
+          | 'ShoppingBag'
+          | 'Factory'
+          | 'Settings'
+          | 'Wrench'
+          | 'Shield'
+          | 'Target'
+          | 'Star';
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'coreServicesBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServiceProcessBlock".
+ */
+export interface ServiceProcessBlock {
+  heading: string;
+  description: string;
+  processItems?:
+    | {
+        number: number;
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'serviceProcessBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1329,6 +1378,8 @@ export interface PagesSelect<T extends boolean = true> {
         serviceDetailBlock?: T | ServiceDetailBlockSelect<T>;
         testimonialsBlock?: T | TestimonialsBlockSelect<T>;
         clientOverviewBlock?: T | ClientOverviewBlockSelect<T>;
+        coreServicesBlock?: T | CoreServicesBlockSelect<T>;
+        serviceProcessBlock?: T | ServiceProcessBlockSelect<T>;
       };
   meta?:
     | T
@@ -1688,6 +1739,42 @@ export interface ClientOverviewBlockSelect<T extends boolean = true> {
     | T
     | {
         icon?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CoreServicesBlock_select".
+ */
+export interface CoreServicesBlockSelect<T extends boolean = true> {
+  heading?: T;
+  description?: T;
+  services?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        iconType?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ServiceProcessBlock_select".
+ */
+export interface ServiceProcessBlockSelect<T extends boolean = true> {
+  heading?: T;
+  description?: T;
+  processItems?:
+    | T
+    | {
+        number?: T;
         title?: T;
         description?: T;
         id?: T;

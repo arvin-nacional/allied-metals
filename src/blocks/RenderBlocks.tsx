@@ -20,6 +20,8 @@ import { MilestonesBlock } from '@/blocks/MilestonesBlock/Component'
 import { ServiceDetailBlock } from '@/blocks/ServiceDetailBlock/Component'
 import { TestimonialsBlock } from '@/blocks/TestimonialsBlock/Component'
 import { ClientOverviewBlock } from '@/blocks/ClientOverviewBlock/Component'
+import { CoreServicesBlock } from '@/blocks/CoreServicesBlock/Component'
+import { ServiceProcessBlock } from '@/blocks/ServiceProcessBlock/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -40,6 +42,8 @@ const blockComponents = {
   serviceDetailBlock: ServiceDetailBlock,
   testimonialsBlock: TestimonialsBlock,
   clientOverviewBlock: ClientOverviewBlock,
+  coreServicesBlock: CoreServicesBlock,
+  serviceProcessBlock: ServiceProcessBlock,
 }
 
 export const RenderBlocks: React.FC<{

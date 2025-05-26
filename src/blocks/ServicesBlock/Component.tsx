@@ -1,22 +1,28 @@
 import React from 'react'
 import { Media } from '@/components/Media'
 import type { ServicesBlock as ServicesBlockType } from '@/payload-types'
+import { cn } from '@/utilities/ui'
 
 // Define types for the component
 
-export const ServicesBlock: React.FC<ServicesBlockType> = ({
+type ServicesBlockProps = ServicesBlockType & {
+  className?: string
+}
+
+export const ServicesBlock: React.FC<ServicesBlockProps> = ({
   heading,
   description,
   services,
   galleryImages,
+  className,
 }) => {
   return (
-    <section id="what-we-do" className="py-20 bg-[#081632]">
+    <section id="what-we-do" className={cn("py-20 bg-white dark:bg-[#081632] transition-colors duration-300", className)}>
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">{heading}</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">{heading}</h2>
           <div className="w-20 h-1 bg-[#00a0e4] mx-auto mb-6"></div>
-          <p className="text-lg text-gray-300">{description}</p>
+          <p className="text-lg text-gray-600 dark:text-gray-300">{description}</p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -38,9 +44,9 @@ export const ServicesBlock: React.FC<ServicesBlockType> = ({
                   {[1, 2, 3, 4].map((num) => (
                     <div
                       key={num}
-                      className="bg-[#061A3A] rounded-lg h-[200px] flex items-center justify-center"
+                      className="bg-gray-200 dark:bg-[#061A3A] rounded-lg h-[200px] flex items-center justify-center transition-colors duration-300"
                     >
-                      <p className="text-gray-400">Image placeholder</p>
+                      <p className="text-gray-500 dark:text-gray-400">Image placeholder</p>
                     </div>
                   ))}
                 </>
@@ -51,13 +57,13 @@ export const ServicesBlock: React.FC<ServicesBlockType> = ({
             <div className="space-y-8">
               {services?.map((service, index) => (
                 <div key={index}>
-                  <h3 className="text-2xl font-bold mb-3 flex items-center">
-                    <span className="w-8 h-8 bg-[#00a0e4] rounded-full flex items-center justify-center mr-3 text-sm">
+                  <h3 className="text-2xl font-bold mb-3 flex items-center text-gray-900 dark:text-white">
+                    <span className="w-8 h-8 bg-[#00a0e4] rounded-full flex items-center justify-center mr-3 text-sm text-white">
                       {service.number}
                     </span>
                     {service.title}
                   </h3>
-                  <p className="text-gray-300 ml-11">{service.description}</p>
+                  <p className="text-gray-600 dark:text-gray-300 ml-11">{service.description}</p>
                 </div>
               ))}
             </div>

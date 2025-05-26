@@ -35,6 +35,7 @@ export async function Footer() {
               We design, fabricate, and install high-quality stainless steel equipment for
               commercial kitchens.
             </p>
+            <ThemeSelector />
           </div>
 
           {/* Quick Links */}

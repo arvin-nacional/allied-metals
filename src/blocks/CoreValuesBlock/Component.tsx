@@ -44,22 +44,25 @@ export const CoreValuesBlock: React.FC<CoreValuesBlockType> = ({
   }
 
   return (
-    <section className="py-20 bg-[#0a1a3a]">
+    <section className="py-20 dark:bg-[#0a1a3a]">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">{heading}</h2>
           <div className="w-20 h-1 bg-[#00a0e4] mx-auto mb-6"></div>
-          <p className="text-lg text-gray-300">{description}</p>
+          <p className="text-lg text-gray-600 dark:text-gray-300">{description}</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {values?.map((value, index) => (
-            <div key={index} className="bg-[#0c2252] p-8 rounded-lg">
+            <div
+              key={index}
+              className="dark:bg-[#0c2252] bg-blue-50 p-8 rounded-xl hover:shadow-lg transition-all duration-300"
+            >
               <div className="w-16 h-16 bg-[#00a0e4]/20 rounded-full flex items-center justify-center mb-6">
                 {renderIcon(value.icon)}
               </div>
               <h3 className="text-xl font-bold mb-3">{value.title}</h3>
-              <p className="text-gray-300">{value.description}</p>
+              <p className="text-gray-600 dark:text-gray-300">{value.description}</p>
             </div>
           ))}
         </div>

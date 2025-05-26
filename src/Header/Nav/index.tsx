@@ -16,11 +16,11 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
       {/* Desktop Nav */}
       <nav className="hidden md:flex space-x-8 items-center ">
         {navItems.map(({ link }, i) => (
-          <CMSLink key={i} {...link} appearance="link" />
+          <CMSLink key={i} {...link} appearance="link" className="!text-white" />
         ))}
         <Link href="/search">
           <span className="sr-only">Search</span>
-          <SearchIcon className="w-5 text-primary" />
+          <SearchIcon className="w-5 text-white" />
         </Link>
       </nav>
       {/* Mobile Hamburger Button */}
@@ -42,13 +42,13 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
                 <CMSLink
                   {...link}
                   appearance="link"
-                  className="text-white hover:text-[#00a0e4] transition-colors py-2"
+                  className="text-white hover:text-[#00a0e4] transition-colors py-2 !text-white"
                 />
               </span>
             ))}
             <Link
               href="/search"
-              className="text-white hover:text-[#00a0e4] transition-colors py-2"
+              className="text-white hover:text-[#00a0e4] transition-colors py-2 !text-white"
               onClick={() => setIsMenuOpen(false)}
             >
               Search

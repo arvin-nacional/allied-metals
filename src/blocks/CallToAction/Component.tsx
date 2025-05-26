@@ -12,11 +12,13 @@ export const CallToActionBlock: React.FC<CTABlockProps> = (props) => {
   const subheading = (props as any).subheading
 
   return (
-    <section className="py-20 bg-[#0A1A3A]">
+    <section className="py-20 dark:bg-[#0A1A3A] bg-blue-50">
       <div className="container mx-auto px-4 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">{heading}</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 dark:text-white">{heading}</h2>
         <div className="w-20 h-1 bg-[#00a0e4] mx-auto mb-6"></div>
-        <p className="text-lg text-gray-300 max-w-3xl mx-auto mb-8">{subheading}</p>
+        <p className="text-lg text-gray-900 dark:text-gray-300 max-w-3xl mx-auto mb-8">
+          {subheading}
+        </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           {(links || []).map(({ link }, i) => {
             const isOutline = link?.appearance === 'outline'
