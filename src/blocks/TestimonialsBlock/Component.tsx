@@ -18,12 +18,7 @@ export const TestimonialsBlock: React.FC<{
     rating: number
     initials: string
   }[]
-}> = ({ 
-  title, 
-  description, 
-  backgroundColorClass = 'bg-[#081632]',
-  testimonials 
-}) => {
+}> = ({ title, description, backgroundColorClass = 'bg-[#081632]', testimonials }) => {
   return (
     <section className={`py-20 ${backgroundColorClass}`}>
       <div className="container mx-auto px-4">
@@ -34,34 +29,35 @@ export const TestimonialsBlock: React.FC<{
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {testimonials && testimonials.map((testimonial) => (
-            <div key={testimonial.id} className="bg-[#0c2252] p-8 rounded-lg">
-              <div className="flex mb-4">
-                {Array.from({ length: 5 }).map((_, index) => (
-                  <Star 
-                    key={index} 
-                    className={`h-5 w-5 ${index < testimonial.rating ? 'text-[#00a0e4]' : 'text-gray-600'}`} 
-                    fill={index < testimonial.rating ? 'currentColor' : 'none'}
-                  />
-                ))}
-              </div>
-              <blockquote className="italic text-gray-300 mb-6">
-                "{testimonial.quote}"
-              </blockquote>
-              <div className="flex items-center">
-                <div className="w-12 h-12 bg-[#00a0e4]/20 rounded-full flex items-center justify-center mr-4">
-                  <span className="text-[#00a0e4] font-bold">{testimonial.initials}</span>
+          {testimonials &&
+            testimonials.map((testimonial) => (
+              <div key={testimonial.id} className="bg-[#0c2252] p-8 rounded-lg">
+                <div className="flex mb-4">
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <Star
+                      key={index}
+                      className={`h-5 w-5 ${index < testimonial.rating ? 'text-[#00a0e4]' : 'text-gray-600'}`}
+                      fill={index < testimonial.rating ? 'currentColor' : 'none'}
+                    />
+                  ))}
                 </div>
-                <div>
-                  <h4 className="font-bold">{testimonial.author}</h4>
-                  <p className="text-sm text-gray-400">
-                    {testimonial.role}
-                    {testimonial.company && `, ${testimonial.company}`}
-                  </p>
+                <blockquote className="italic text-gray-300 mb-6">
+                  &quot;{testimonial.quote}&quot;
+                </blockquote>
+                <div className="flex items-center">
+                  <div className="w-12 h-12 bg-[#00a0e4]/20 rounded-full flex items-center justify-center mr-4">
+                    <span className="text-[#00a0e4] font-bold">{testimonial.initials}</span>
+                  </div>
+                  <div>
+                    <h4 className="font-bold">{testimonial.author}</h4>
+                    <p className="text-sm text-gray-400">
+                      {testimonial.role}
+                      {testimonial.company && `, ${testimonial.company}`}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
     </section>
