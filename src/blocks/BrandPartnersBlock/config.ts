@@ -46,6 +46,15 @@ export const BrandPartnersBlock: Block = {
           relationTo: 'media',
           required: true,
         },
+        {
+          name: 'invertImageInDarkMode',
+          type: 'checkbox',
+          label: 'Invert Logo in Dark Mode',
+          admin: {
+            description: 'Enable this to invert black colors to white in dark mode for better visibility',
+          },
+          defaultValue: false,
+        },
       ],
     },
     {
@@ -72,5 +81,6 @@ export const BrandPartnersBlock: Block = {
         },
       ],
     },
+
   ],
 }

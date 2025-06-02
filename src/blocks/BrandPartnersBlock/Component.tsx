@@ -32,21 +32,19 @@ export const BrandPartnersBlock: React.FC<{
   partners?: {
     name: string
     logo: string | MediaType
+    invertImageInDarkMode?: boolean
     id?: string
   }[]
   background?: string
   blockType: 'brandPartnersBlock'
-}> = ({
-  heading,
-  description,
-  partners,
-  background,
-}) => {
+}> = ({ heading, description, partners, background }) => {
   // If no partners data is provided, use placeholder data for demo purposes
   // Set default values for props
   const headingText = heading || 'Our Brand Partners'
-  const descriptionText = description || "We partner with the world's leading kitchen equipment manufacturers to bring you the best in quality and innovation."
-  
+  const descriptionText =
+    description ||
+    "We partner with the world's leading kitchen equipment manufacturers to bring you the best in quality and innovation."
+
   // If no partners data is provided, use placeholder data for demo purposes
   const displayPartners =
     partners && partners.length > 0
@@ -60,8 +58,9 @@ export const BrandPartnersBlock: React.FC<{
             width: 160,
             height: 80,
             createdAt: new Date().toISOString(),
-            updatedAt: new Date().toISOString()
+            updatedAt: new Date().toISOString(),
           },
+          invertImageInDarkMode: false,
           id: `placeholder-${i}`,
         }))
 
@@ -87,7 +86,7 @@ export const BrandPartnersBlock: React.FC<{
                   <Media
                     resource={partner.logo}
                     alt={partner.name}
-                    imgClassName="max-h-12 w-auto object-contain"
+                    imgClassName={`max-h-12 w-auto object-contain ${partner.invertImageInDarkMode ? 'dark:invert dark:brightness-[1.25] dark:hue-rotate-180' : ''}`}
                   />
                 </div>
               </AnimatedElement>

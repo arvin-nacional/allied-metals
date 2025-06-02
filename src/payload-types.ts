@@ -1086,6 +1086,10 @@ export interface BrandPartnersBlock {
     | {
         name: string;
         logo: string | Media;
+        /**
+         * Enable this to invert black colors to white in dark mode for better visibility
+         */
+        invertImageInDarkMode?: boolean | null;
         id?: string | null;
       }[]
     | null;
@@ -1815,6 +1819,7 @@ export interface BrandPartnersBlockSelect<T extends boolean = true> {
     | {
         name?: T;
         logo?: T;
+        invertImageInDarkMode?: T;
         id?: T;
       };
   background?: T;
