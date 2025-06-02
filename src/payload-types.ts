@@ -491,6 +491,7 @@ export interface Page {
     | ClientOverviewBlock
     | CoreServicesBlock
     | ServiceProcessBlock
+    | BrandPartnersBlock
   )[];
   meta?: {
     title?: string | null;
@@ -1076,6 +1077,25 @@ export interface ServiceProcessBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BrandPartnersBlock".
+ */
+export interface BrandPartnersBlock {
+  heading: string;
+  description?: string | null;
+  partners?:
+    | {
+        name: string;
+        logo: string | Media;
+        id?: string | null;
+      }[]
+    | null;
+  background?: ('bg-[#081632]' | 'bg-[#0a1a3a]' | 'bg-[#050f22]' | 'bg-transparent') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'brandPartnersBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1380,6 +1400,7 @@ export interface PagesSelect<T extends boolean = true> {
         clientOverviewBlock?: T | ClientOverviewBlockSelect<T>;
         coreServicesBlock?: T | CoreServicesBlockSelect<T>;
         serviceProcessBlock?: T | ServiceProcessBlockSelect<T>;
+        brandPartnersBlock?: T | BrandPartnersBlockSelect<T>;
       };
   meta?:
     | T
@@ -1779,6 +1800,24 @@ export interface ServiceProcessBlockSelect<T extends boolean = true> {
         description?: T;
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "BrandPartnersBlock_select".
+ */
+export interface BrandPartnersBlockSelect<T extends boolean = true> {
+  heading?: T;
+  description?: T;
+  partners?:
+    | T
+    | {
+        name?: T;
+        logo?: T;
+        id?: T;
+      };
+  background?: T;
   id?: T;
   blockName?: T;
 }

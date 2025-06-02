@@ -22,6 +22,7 @@ import { TestimonialsBlock } from '../../blocks/TestimonialsBlock/config'
 import { ClientOverviewBlock } from '../../blocks/ClientOverviewBlock/config'
 import { CoreServicesBlock } from '../../blocks/CoreServicesBlock/config'
 import { ServiceProcessBlock } from '../../blocks/ServiceProcessBlock/config'
+import { BrandPartnersBlock } from '../../blocks/BrandPartnersBlock/config'
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -111,6 +112,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 ClientOverviewBlock,
                 CoreServicesBlock,
                 ServiceProcessBlock,
+                BrandPartnersBlock,
               ],
               required: true,
               admin: {
