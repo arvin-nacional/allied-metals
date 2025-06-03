@@ -22,6 +22,7 @@ import { TestimonialsBlock } from '@/blocks/TestimonialsBlock/Component'
 import { ClientOverviewBlock } from '@/blocks/ClientOverviewBlock/Component'
 import { CoreServicesBlock } from '@/blocks/CoreServicesBlock/Component'
 import { ServiceProcessBlock } from '@/blocks/ServiceProcessBlock/Component'
+import { BrandPartnersBlock } from '@/blocks/BrandPartnersBlock/Component'
 import { ContactSectionBlock } from '@/blocks/ContactSection/Component'
 
 const blockComponents = {
@@ -45,6 +46,7 @@ const blockComponents = {
   clientOverviewBlock: ClientOverviewBlock,
   coreServicesBlock: CoreServicesBlock,
   serviceProcessBlock: ServiceProcessBlock,
+  brandPartnersBlock: BrandPartnersBlock,
   contactSection: ContactSectionBlock,
 }
 

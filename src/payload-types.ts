@@ -491,7 +491,11 @@ export interface Page {
     | ClientOverviewBlock
     | CoreServicesBlock
     | ServiceProcessBlock
+<<<<<<< HEAD
     | ContactSectionBlock
+=======
+    | BrandPartnersBlock
+>>>>>>> origin/brand-partners
   )[];
   meta?: {
     title?: string | null;
@@ -1077,6 +1081,7 @@ export interface ServiceProcessBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+<<<<<<< HEAD
  * via the `definition` "ContactSectionBlock".
  */
 export interface ContactSectionBlock {
@@ -1111,6 +1116,28 @@ export interface ContactSectionBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'contactSection';
+=======
+ * via the `definition` "BrandPartnersBlock".
+ */
+export interface BrandPartnersBlock {
+  heading: string;
+  description?: string | null;
+  partners?:
+    | {
+        name: string;
+        logo: string | Media;
+        /**
+         * Enable this to invert black colors to white in dark mode for better visibility
+         */
+        invertImageInDarkMode?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  background?: ('bg-[#081632]' | 'bg-[#0a1a3a]' | 'bg-[#050f22]' | 'bg-transparent') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'brandPartnersBlock';
+>>>>>>> origin/brand-partners
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1418,7 +1445,11 @@ export interface PagesSelect<T extends boolean = true> {
         clientOverviewBlock?: T | ClientOverviewBlockSelect<T>;
         coreServicesBlock?: T | CoreServicesBlockSelect<T>;
         serviceProcessBlock?: T | ServiceProcessBlockSelect<T>;
+<<<<<<< HEAD
         contactSection?: T | ContactSectionBlockSelect<T>;
+=======
+        brandPartnersBlock?: T | BrandPartnersBlockSelect<T>;
+>>>>>>> origin/brand-partners
       };
   meta?:
     | T
@@ -1823,6 +1854,7 @@ export interface ServiceProcessBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+<<<<<<< HEAD
  * via the `definition` "ContactSectionBlock_select".
  */
 export interface ContactSectionBlockSelect<T extends boolean = true> {
@@ -1862,6 +1894,22 @@ export interface ContactSectionBlockSelect<T extends boolean = true> {
         formDescription?: T;
         form?: T;
       };
+=======
+ * via the `definition` "BrandPartnersBlock_select".
+ */
+export interface BrandPartnersBlockSelect<T extends boolean = true> {
+  heading?: T;
+  description?: T;
+  partners?:
+    | T
+    | {
+        name?: T;
+        logo?: T;
+        invertImageInDarkMode?: T;
+        id?: T;
+      };
+  background?: T;
+>>>>>>> origin/brand-partners
   id?: T;
   blockName?: T;
 }
