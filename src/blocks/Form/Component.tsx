@@ -7,6 +7,8 @@ import { useForm, FormProvider } from 'react-hook-form'
 import RichText from '@/components/RichText'
 import { Button } from '@/components/ui/button'
 import type { SerializedEditorState } from '@payloadcms/richtext-lexical/lexical'
+import { useTheme } from '@/providers/Theme'
+import { cn } from '@/utilities/ui'
 
 import { fields } from './fields'
 import { getClientSideURL } from '@/utilities/getURL'
@@ -113,18 +115,56 @@ export const FormBlock: React.FC<
     [router, formID, redirect, confirmationType],
   )
 
+  const { theme } = useTheme()
+
   return (
     <div className="container lg:max-w-[48rem]">
       {enableIntro && introContent && !hasSubmitted && (
-        <RichText className="mb-8 lg:mb-12" data={introContent} enableGutter={false} />
+        <RichText
+          className={cn('mb-8 lg:mb-12', {
+            'text-foreground': theme === 'light',
+            'text-white': theme === 'dark',
+          })}
+          data={introContent}
+          enableGutter={false}
+        />
       )}
-      <div className="p-4 lg:p-6 border border-border rounded-[0.8rem]">
+      <div
+        className={cn('p-4 lg:p-6 border rounded-[0.8rem] transition-colors', {
+          'border-border bg-white': theme === 'light',
+          'border-gray-700 bg-gray-900': theme === 'dark',
+        })}
+      >
         <FormProvider {...formMethods}>
           {!isLoading && hasSubmitted && confirmationType === 'message' && (
-            <RichText data={confirmationMessage} />
+            <RichText
+              data={confirmationMessage}
+              className={cn({
+                'text-foreground': theme === 'light',
+                'text-white': theme === 'dark',
+              })}
+            />
           )}
-          {isLoading && !hasSubmitted && <p>Loading, please wait...</p>}
-          {error && <div>{`${error.status || '500'}: ${error.message || ''}`}</div>}
+          {isLoading && !hasSubmitted && (
+            <p
+              className={cn({
+                'text-foreground': theme === 'light',
+                'text-white': theme === 'dark',
+              })}
+            >
+              Loading, please wait...
+            </p>
+          )}
+          {error && (
+            <div
+              className={cn('p-3 rounded-md', {
+                'bg-red-100 text-red-700': theme === 'light',
+                'bg-red-900/30 text-red-300': theme === 'dark',
+              })}
+            >
+              {`${error.status || '500'}: ${error.message || ''}`}
+            </div>
+          )}
           {!hasSubmitted && (
             <form id={formID} onSubmit={handleSubmit(onSubmit)}>
               <div className="mb-4 last:mb-0">
@@ -143,6 +183,7 @@ export const FormBlock: React.FC<
                             control={control}
                             errors={errors}
                             register={register}
+                            theme={theme}
                           />
                         </div>
                       )
@@ -151,7 +192,16 @@ export const FormBlock: React.FC<
                   })}
               </div>
 
-              <Button form={formID} type="submit" variant="default">
+              <Button
+                form={formID}
+                type="submit"
+                variant="default"
+                className={cn({
+                  'bg-[#00a0e4] text-white hover:bg-[#0081b8]': theme === 'light',
+                  'bg-[#00a0e4] text-white hover:bg-[#0081b8] shadow-lg shadow-primary/20':
+                    theme === 'dark',
+                })}
+              >
                 {submitButtonLabel}
               </Button>
             </form>
