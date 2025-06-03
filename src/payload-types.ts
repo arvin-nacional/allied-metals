@@ -491,11 +491,8 @@ export interface Page {
     | ClientOverviewBlock
     | CoreServicesBlock
     | ServiceProcessBlock
-<<<<<<< HEAD
     | ContactSectionBlock
-=======
     | BrandPartnersBlock
->>>>>>> origin/brand-partners
   )[];
   meta?: {
     title?: string | null;
@@ -1081,7 +1078,6 @@ export interface ServiceProcessBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
-<<<<<<< HEAD
  * via the `definition` "ContactSectionBlock".
  */
 export interface ContactSectionBlock {
@@ -1116,7 +1112,9 @@ export interface ContactSectionBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'contactSection';
-=======
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "BrandPartnersBlock".
  */
 export interface BrandPartnersBlock {
@@ -1137,7 +1135,6 @@ export interface BrandPartnersBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'brandPartnersBlock';
->>>>>>> origin/brand-partners
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1445,11 +1442,8 @@ export interface PagesSelect<T extends boolean = true> {
         clientOverviewBlock?: T | ClientOverviewBlockSelect<T>;
         coreServicesBlock?: T | CoreServicesBlockSelect<T>;
         serviceProcessBlock?: T | ServiceProcessBlockSelect<T>;
-<<<<<<< HEAD
         contactSection?: T | ContactSectionBlockSelect<T>;
-=======
         brandPartnersBlock?: T | BrandPartnersBlockSelect<T>;
->>>>>>> origin/brand-partners
       };
   meta?:
     | T
@@ -1854,7 +1848,6 @@ export interface ServiceProcessBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
-<<<<<<< HEAD
  * via the `definition` "ContactSectionBlock_select".
  */
 export interface ContactSectionBlockSelect<T extends boolean = true> {
@@ -1894,7 +1887,11 @@ export interface ContactSectionBlockSelect<T extends boolean = true> {
         formDescription?: T;
         form?: T;
       };
-=======
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "BrandPartnersBlock_select".
  */
 export interface BrandPartnersBlockSelect<T extends boolean = true> {
@@ -1909,7 +1906,6 @@ export interface BrandPartnersBlockSelect<T extends boolean = true> {
         id?: T;
       };
   background?: T;
->>>>>>> origin/brand-partners
   id?: T;
   blockName?: T;
 }
