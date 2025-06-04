@@ -28,9 +28,7 @@ export async function Footer() {
           {/* Company Info */}
           <div className="md:w-[25%]">
             <Logo />
-            <p className="text-gray-300 mb-4 mt-4">
-              Premium commercial kitchen solutions for the hospitality industry since 1965.
-            </p>
+            <p className="text-gray-300 mb-4 mt-4">THE TOTAL KITCHEN COMPANY.</p>
             <p className="text-gray-300">
               We design, fabricate, and install high-quality stainless steel equipment for
               commercial kitchens.

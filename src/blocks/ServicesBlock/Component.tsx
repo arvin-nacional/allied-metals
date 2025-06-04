@@ -17,10 +17,15 @@ export const ServicesBlock: React.FC<ServicesBlockProps> = ({
   className,
 }) => {
   return (
-    <section id="what-we-do" className={cn("py-20 bg-white dark:bg-[#081632] transition-colors duration-300", className)}>
+    <section
+      id="what-we-do"
+      className={cn('py-20 bg-white dark:bg-[#081632] transition-colors duration-300', className)}
+    >
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">{heading}</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
+            {heading}
+          </h2>
           <div className="w-20 h-1 bg-[#00a0e4] mx-auto mb-6"></div>
           <p className="text-lg text-gray-600 dark:text-gray-300">{description}</p>
         </div>
@@ -34,7 +39,7 @@ export const ServicesBlock: React.FC<ServicesBlockProps> = ({
                     <Media
                       resource={item.image}
                       alt={item.alt}
-                      imgClassName="rounded-lg h-[350px] max-sm:h-[200px]"
+                      imgClassName="rounded-lg h-[350px] max-sm:h-[200px] object-cover"
                     />
                   </div>
                 ))
