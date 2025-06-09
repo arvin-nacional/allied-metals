@@ -27,7 +27,7 @@ export const BrandPartnersBlock: Block = {
       type: 'array',
       label: 'Brand Partners',
       minRows: 1,
-      maxRows: 24,
+      maxRows: 72,
       labels: {
         singular: 'Partner',
         plural: 'Partners',
@@ -51,7 +51,8 @@ export const BrandPartnersBlock: Block = {
           type: 'checkbox',
           label: 'Invert Logo in Dark Mode',
           admin: {
-            description: 'Enable this to invert black colors to white in dark mode for better visibility',
+            description:
+              'Enable this to invert black colors to white in dark mode for better visibility',
           },
           defaultValue: false,
         },
@@ -81,6 +82,5 @@ export const BrandPartnersBlock: Block = {
         },
       ],
     },
-
   ],
 }
