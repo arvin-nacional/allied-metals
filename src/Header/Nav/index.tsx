@@ -46,13 +46,13 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
                 />
               </span>
             ))}
-            <Link
+            {/* <Link
               href="/search"
               className="text-white hover:text-[#00a0e4] transition-colors py-2 !text-white"
               onClick={() => setIsMenuOpen(false)}
             >
               Search
-            </Link>
+            </Link> */}
           </nav>
         </div>
       )}
