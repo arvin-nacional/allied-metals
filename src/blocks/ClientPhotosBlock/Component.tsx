@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 
 // Define types until they get generated in payload-types
 type Media = {
@@ -103,16 +104,41 @@ export const ClientPhotosBlock: React.FC<ClientPhotosBlockType> = ({
   displayOptions,
 }) => {
   const [activeTab, setActiveTab] = useState<string>('')
+  const searchParams = useSearchParams()
+  const router = useRouter()
+  const pathname = usePathname()
 
   useEffect(() => {
-    // Set the default active tab on initial render
     if (clientTypes && clientTypes.length > 0) {
+      // Check for category query parameter first
+      const categoryParam = searchParams.get('category')
+      
+      if (categoryParam) {
+        // Find if the category exists in clientTypes
+        const matchingType = clientTypes.find((type) => type.slug === categoryParam)
+        if (matchingType) {
+          setActiveTab(categoryParam)
+          return
+        }
+      }
+      
+      // Fallback to default tab if no valid category param
       const defaultType = clientTypes.find((type) => type.isDefault) || clientTypes[0]
       if (defaultType) {
         setActiveTab(defaultType.slug)
       }
     }
-  }, [clientTypes])
+  }, [clientTypes, searchParams])
+
+  // Function to handle tab changes and update URL
+  const handleTabChange = (slug: string) => {
+    setActiveTab(slug)
+    
+    // Update URL with query parameter
+    const params = new URLSearchParams(searchParams.toString())
+    params.set('category', slug)
+    router.push(`${pathname}?${params.toString()}`, { scroll: false })
+  }
 
   // Background color and grid layout classes
   const bgClass = getBackgroundClass(displayOptions?.backgroundColor)
@@ -136,7 +162,7 @@ export const ClientPhotosBlock: React.FC<ClientPhotosBlockType> = ({
           {clientTypes.map((type) => (
             <button
               key={type.slug}
-              onClick={() => setActiveTab(type.slug)}
+              onClick={() => handleTabChange(type.slug)}
               className={`px-8 py-3 rounded-full font-medium transition-all duration-300 ${
                 activeTab === type.slug
                   ? 'bg-[#00a0e4] text-white shadow-lg transform scale-105'
