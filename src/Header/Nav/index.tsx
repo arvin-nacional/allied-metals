@@ -18,10 +18,6 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
         {navItems.map(({ link }, i) => (
           <CMSLink key={i} {...link} appearance="link" className="!text-white" />
         ))}
-        <Link href="/search">
-          <span className="sr-only">Search</span>
-          <SearchIcon className="w-5 text-white" />
-        </Link>
       </nav>
       {/* Mobile Hamburger Button */}
       <Button
