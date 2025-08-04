@@ -48,7 +48,7 @@ interface ClientPhotosBlockType {
   clientTypes?: ClientType[]
   displayOptions?: DisplayOptions
 }
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+
 import {
   Card,
   CardContent,
@@ -131,26 +131,29 @@ export const ClientPhotosBlock: React.FC<ClientPhotosBlockType> = ({
           <p className="text-lg text-gray-600 dark:text-gray-300">{description}</p>
         </div>
 
-        <Tabs
-          defaultValue={activeTab}
-          value={activeTab}
-          onValueChange={setActiveTab}
-          className="w-full"
-        >
-          <TabsList className="flex flex-wrap border-b border-gray-200 dark:border-gray-700 mb-8 w-full justify-start overflow-x-auto">
-            {clientTypes.map((type) => (
-              <TabsTrigger
-                key={type.slug}
-                value={type.slug}
-                className="px-6 py-3 text-sm font-medium border-b-2 whitespace-nowrap data-[state=active]:border-[#00a0e4] data-[state=active]:text-[#00a0e4]"
-              >
-                {type.name}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-
+        {/* Tab Buttons */}
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
           {clientTypes.map((type) => (
-            <TabsContent key={type.slug} value={type.slug}>
+            <button
+              key={type.slug}
+              onClick={() => setActiveTab(type.slug)}
+              className={`px-8 py-3 rounded-full font-medium transition-all duration-300 ${
+                activeTab === type.slug
+                  ? 'bg-[#00a0e4] text-white shadow-lg transform scale-105'
+                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600 hover:border-[#00a0e4] hover:text-[#00a0e4] hover:shadow-md'
+              }`}
+            >
+              {type.name}
+            </button>
+          ))}
+        </div>
+
+        {/* Tab Content */}
+        {clientTypes.map((type) => (
+          <div
+            key={type.slug}
+            className={activeTab === type.slug ? 'block' : 'hidden'}
+          >
               <div className="space-y-12">
                 {type.projects?.map((project, projectIndex) => (
                   <div key={projectIndex} className="space-y-4">
@@ -170,7 +173,7 @@ export const ClientPhotosBlock: React.FC<ClientPhotosBlockType> = ({
                         </p>
                       )}
                     </div>
-                    
+
                     {/* Project Photos Gallery */}
                     {project.projectPhotos && project.projectPhotos.length > 0 && (
                       <div className={`grid ${gridClass} gap-4`}>
@@ -179,17 +182,23 @@ export const ClientPhotosBlock: React.FC<ClientPhotosBlockType> = ({
                             <div className="relative aspect-[4/3] w-full bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden">
                               {photoItem.photo && (
                                 <Image
-                                  src={typeof photoItem.photo === 'string' 
-                                    ? photoItem.photo 
-                                    : photoItem.photo?.url || ''}
-                                  alt={photoItem.caption || project.projectTitle || `Project photo ${photoIndex + 1} for ${project.clientName}`}
+                                  src={
+                                    typeof photoItem.photo === 'string'
+                                      ? photoItem.photo
+                                      : photoItem.photo?.url || ''
+                                  }
+                                  alt={
+                                    photoItem.caption ||
+                                    project.projectTitle ||
+                                    `Project photo ${photoIndex + 1} for ${project.clientName}`
+                                  }
                                   fill
                                   className="object-cover transition-transform duration-300 group-hover:scale-105"
                                 />
                               )}
                             </div>
                             {photoItem.caption && (
-                              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 text-center">
+                              <p className="mt-2 text-lg text-gray-600 dark:text-gray-400 text-center">
                                 {photoItem.caption}
                               </p>
                             )}
@@ -200,9 +209,8 @@ export const ClientPhotosBlock: React.FC<ClientPhotosBlockType> = ({
                   </div>
                 ))}
               </div>
-            </TabsContent>
-          ))}
-        </Tabs>
+          </div>
+        ))}
       </div>
     </section>
   )
