@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useSearchParams, useRouter, usePathname } from 'next/navigation'
@@ -97,7 +97,8 @@ const getGridClass = (itemsPerRow: string | undefined) => {
   }
 }
 
-export const ClientPhotosBlock: React.FC<ClientPhotosBlockType> = ({
+// Component that uses search params - needs to be wrapped in Suspense
+const ClientPhotosBlockContent: React.FC<ClientPhotosBlockType> = ({
   heading,
   description,
   clientTypes = [],
@@ -239,5 +240,58 @@ export const ClientPhotosBlock: React.FC<ClientPhotosBlockType> = ({
         ))}
       </div>
     </section>
+  )
+}
+
+// Fallback component for loading state
+const ClientPhotosBlockFallback: React.FC<ClientPhotosBlockType> = ({
+  heading,
+  description,
+  clientTypes = [],
+  displayOptions,
+}) => {
+  const bgClass = getBackgroundClass(displayOptions?.backgroundColor)
+  const defaultType = clientTypes?.find((type) => type.isDefault) || clientTypes?.[0]
+  
+  return (
+    <section className={`py-16 ${bgClass}`}>
+      <div className="container mx-auto px-4">
+        <div className="max-w-3xl mx-auto text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">{heading}</h2>
+          <div className="w-20 h-1 bg-[#00a0e4] mx-auto mb-6"></div>
+          <p className="text-lg text-gray-600 dark:text-gray-300">{description}</p>
+        </div>
+        
+        {/* Loading state for tabs */}
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
+          {clientTypes?.map((type) => (
+            <div
+              key={type.slug}
+              className={`px-8 py-3 rounded-full font-medium transition-all duration-300 ${
+                type.slug === defaultType?.slug
+                  ? 'bg-[#00a0e4] text-white shadow-lg transform scale-105'
+                  : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-300 dark:border-gray-600'
+              }`}
+            >
+              {type.name}
+            </div>
+          ))}
+        </div>
+        
+        {/* Loading indicator */}
+        <div className="flex justify-center">
+          <div className="animate-pulse text-gray-500">Loading...</div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+// Main exported component with Suspense boundary
+export const ClientPhotosBlock: React.FC<ClientPhotosBlockType> = (props) => {
+  return (
+    <Suspense fallback={<ClientPhotosBlockFallback {...props} />}>
+      <ClientPhotosBlockContent {...props} />
+    </Suspense>
   )
 }
