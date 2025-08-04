@@ -24,6 +24,7 @@ import { CoreServicesBlock } from '@/blocks/CoreServicesBlock/Component'
 import { ServiceProcessBlock } from '@/blocks/ServiceProcessBlock/Component'
 import { BrandPartnersBlock } from '@/blocks/BrandPartnersBlock/Component'
 import { ContactSectionBlock } from '@/blocks/ContactSection/Component'
+import { ClientPhotosBlock } from '@/blocks/ClientPhotosBlock/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -36,6 +37,7 @@ const blockComponents = {
   servicesBlock: ServicesBlock,
   clientsBlock: ClientsBlock,
   processBlock: ProcessBlock,
+  clientPhotosBlock: ClientPhotosBlock,
   coreValuesBlock: CoreValuesBlock,
   missionVisionBlock: MissionVisionBlock,
   storyBlock: StoryBlock,

@@ -25,6 +25,7 @@ import { ServiceProcessBlock } from '../../blocks/ServiceProcessBlock/config'
 import { ContactSection } from '../../blocks/ContactSection/config'
 
 import { BrandPartnersBlock } from '../../blocks/BrandPartnersBlock/config'
+import { ClientPhotosBlock } from '../../blocks/ClientPhotosBlock/config'
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -116,6 +117,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 ServiceProcessBlock,
                 ContactSection,
                 BrandPartnersBlock,
+                ClientPhotosBlock,
               ],
               required: true,
               admin: {

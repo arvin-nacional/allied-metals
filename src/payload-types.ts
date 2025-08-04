@@ -493,6 +493,7 @@ export interface Page {
     | ServiceProcessBlock
     | ContactSectionBlock
     | BrandPartnersBlock
+    | ClientPhotosBlock
   )[];
   meta?: {
     title?: string | null;
@@ -1138,6 +1139,52 @@ export interface BrandPartnersBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ClientPhotosBlock".
+ */
+export interface ClientPhotosBlock {
+  heading?: string | null;
+  description?: string | null;
+  clientTypes?:
+    | {
+        /**
+         * E.g., Hotels, Restaurants, Retail, etc.
+         */
+        name: string;
+        /**
+         * Used for tab navigation. Use only lowercase letters, numbers, and hyphens.
+         */
+        slug: string;
+        isDefault?: boolean | null;
+        projects?:
+          | {
+              clientName: string;
+              projectTitle: string;
+              projectDescription?: string | null;
+              projectPhotos?:
+                | {
+                    photo: string | Media;
+                    caption?: string | null;
+                    id?: string | null;
+                  }[]
+                | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  displayOptions?: {
+    backgroundColor?: ('dark-blue' | 'light-blue' | 'very-dark-blue' | 'transparent') | null;
+    itemsPerRow?: ('2' | '3' | '4') | null;
+    showProjectTitle?: boolean | null;
+    showClientName?: boolean | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'clientPhotosBlock';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1444,6 +1491,7 @@ export interface PagesSelect<T extends boolean = true> {
         serviceProcessBlock?: T | ServiceProcessBlockSelect<T>;
         contactSection?: T | ContactSectionBlockSelect<T>;
         brandPartnersBlock?: T | BrandPartnersBlockSelect<T>;
+        clientPhotosBlock?: T | ClientPhotosBlockSelect<T>;
       };
   meta?:
     | T
@@ -1906,6 +1954,47 @@ export interface BrandPartnersBlockSelect<T extends boolean = true> {
         id?: T;
       };
   background?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ClientPhotosBlock_select".
+ */
+export interface ClientPhotosBlockSelect<T extends boolean = true> {
+  heading?: T;
+  description?: T;
+  clientTypes?:
+    | T
+    | {
+        name?: T;
+        slug?: T;
+        isDefault?: T;
+        projects?:
+          | T
+          | {
+              clientName?: T;
+              projectTitle?: T;
+              projectDescription?: T;
+              projectPhotos?:
+                | T
+                | {
+                    photo?: T;
+                    caption?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
+        id?: T;
+      };
+  displayOptions?:
+    | T
+    | {
+        backgroundColor?: T;
+        itemsPerRow?: T;
+        showProjectTitle?: T;
+        showClientName?: T;
+      };
   id?: T;
   blockName?: T;
 }
