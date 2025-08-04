@@ -20,8 +20,7 @@ export const ClientPhotosBlock: Block = {
       type: 'textarea',
       label: 'Description',
       required: false,
-      defaultValue:
-        "Browse our portfolio of completed projects across various client categories.",
+      defaultValue: 'Browse our portfolio of completed projects across various client categories.',
     },
     {
       name: 'clientTypes',
@@ -44,7 +43,8 @@ export const ClientPhotosBlock: Block = {
           label: 'Slug (URL-friendly identifier)',
           required: true,
           admin: {
-            description: 'Used for tab navigation. Use only lowercase letters, numbers, and hyphens.',
+            description:
+              'Used for tab navigation. Use only lowercase letters, numbers, and hyphens.',
           },
         },
         {
@@ -82,7 +82,7 @@ export const ClientPhotosBlock: Block = {
               type: 'array',
               label: 'Project Photos',
               minRows: 1,
-              maxRows: 10,
+              maxRows: 12,
               fields: [
                 {
                   name: 'photo',
@@ -96,32 +96,32 @@ export const ClientPhotosBlock: Block = {
                   type: 'text',
                   label: 'Caption',
                   required: false,
-                }
-              ]
-            }
-          ]
-        }
+                },
+              ],
+            },
+          ],
+        },
       ],
       defaultValue: [
         {
           name: 'Hotels',
           slug: 'hotels',
           isDefault: true,
-          projects: []
+          projects: [],
         },
         {
           name: 'Restaurants',
           slug: 'restaurants',
           isDefault: false,
-          projects: []
+          projects: [],
         },
         {
           name: 'Retail',
           slug: 'retail',
           isDefault: false,
-          projects: []
-        }
-      ]
+          projects: [],
+        },
+      ],
     },
     {
       name: 'displayOptions',
@@ -174,8 +174,8 @@ export const ClientPhotosBlock: Block = {
           type: 'checkbox',
           label: 'Show Client Name',
           defaultValue: true,
-        }
-      ]
-    }
+        },
+      ],
+    },
   ],
 }
