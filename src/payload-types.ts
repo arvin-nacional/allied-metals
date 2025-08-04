@@ -1023,6 +1023,10 @@ export interface ClientOverviewBlock {
         icon: 'hotels' | 'hospitals' | 'foodchain' | 'restaurants' | 'education' | 'corporate';
         title: string;
         description: string;
+        /**
+         * Optional link to navigate when category is clicked (e.g., /projects/hotels)
+         */
+        link?: string | null;
         id?: string | null;
       }[]
     | null;
@@ -1853,6 +1857,7 @@ export interface ClientOverviewBlockSelect<T extends boolean = true> {
         icon?: T;
         title?: T;
         description?: T;
+        link?: T;
         id?: T;
       };
   id?: T;

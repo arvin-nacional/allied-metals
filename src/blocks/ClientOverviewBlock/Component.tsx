@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import {
   Building2,
   HeartPulse,
@@ -46,20 +47,38 @@ export const ClientOverviewBlock: React.FC<ClientOverviewBlockType> = ({
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {clientCategories?.map((category, index) => (
-            <div
-              key={index}
-              className="dark:bg-[#0c2252] bg-blue-50 p-8 rounded-xl hover:shadow-lg transition-all duration-300"
-            >
-              <div className="w-16 h-16 bg-[#00a0e4]/20 rounded-full flex items-center justify-center mb-6">
-                {renderIcon(category.icon)}
+          {clientCategories?.map((category, index) => {
+            const CardContent = (
+              <div
+                className={`dark:bg-[#0c2252] bg-blue-50 p-8 rounded-xl transition-all duration-300 ${
+                  category.link
+                    ? 'hover:shadow-xl hover:scale-105 cursor-pointer hover:bg-blue-100 dark:hover:bg-[#0d2759]'
+                    : 'hover:shadow-lg'
+                }`}
+              >
+                <div className="w-16 h-16 bg-[#00a0e4]/20 rounded-full flex items-center justify-center mb-6">
+                  {renderIcon(category.icon)}
+                </div>
+                <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-gray-300">
+                  {category.title}
+                </h3>
+                <p className="text-gray-900 dark:text-gray-200">{category.description}</p>
+                {category.link && (
+                  <div className="mt-4 text-[#00a0e4] font-medium text-sm flex items-center">
+                    Learn More →
+                  </div>
+                )}
               </div>
-              <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-gray-300">
-                {category.title}
-              </h3>
-              <p className="text-gray-900 dark:text-gray-200">{category.description}</p>
-            </div>
-          ))}
+            )
+
+            return category.link ? (
+              <Link key={index} href={category.link}>
+                {CardContent}
+              </Link>
+            ) : (
+              <div key={index}>{CardContent}</div>
+            )
+          })}
         </div>
       </div>
     </section>

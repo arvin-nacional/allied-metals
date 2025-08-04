@@ -54,6 +54,15 @@ export const ClientOverviewBlock: Block = {
           type: 'textarea',
           required: true,
         },
+        {
+          name: 'link',
+          type: 'text',
+          label: 'Link URL',
+          required: false,
+          admin: {
+            description: 'Optional link to navigate when category is clicked (e.g., /projects/hotels)',
+          },
+        },
       ],
       defaultValue: [
         {
