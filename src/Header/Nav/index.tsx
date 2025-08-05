@@ -6,6 +6,7 @@ import { CMSLink } from '@/components/Link'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Menu, X, Search as SearchIcon } from 'lucide-react'
+import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 
 export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
   const navItems = data?.navItems || []
@@ -18,6 +19,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
         {navItems.map(({ link }, i) => (
           <CMSLink key={i} {...link} appearance="link" className="!text-white" />
         ))}
+        <ThemeSelector />
       </nav>
       {/* Mobile Hamburger Button */}
       <Button
@@ -42,6 +44,9 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
                 />
               </span>
             ))}
+            <div className="pt-2 text-white">
+              <ThemeSelector />
+            </div>
             {/* <Link
               href="/search"
               className="text-white hover:text-[#00a0e4] transition-colors py-2 !text-white"

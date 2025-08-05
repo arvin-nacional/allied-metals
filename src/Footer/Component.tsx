@@ -5,7 +5,6 @@ import { MapPin, Phone, Mail } from 'lucide-react'
 
 import type { Footer } from '@/payload-types'
 
-import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
 import { CMSLink } from '@/components/Link'
 import { Logo } from '@/components/Logo/Logo'
 
@@ -33,7 +32,6 @@ export async function Footer() {
               We design, fabricate, and install high-quality stainless steel equipment for
               commercial kitchens.
             </p>
-            <ThemeSelector />
           </div>
 
           {/* Quick Links */}
@@ -89,7 +87,6 @@ export async function Footer() {
             <p className="text-gray-400">
               &copy; {currentYear} Allied Metals. All rights reserved.
             </p>
-            {/* <ThemeSelector /> */}
           </div>
           <div className="flex space-x-4">
             <Link href="#" className="text-gray-400 hover:text-[#00a0e4] transition-colors">
