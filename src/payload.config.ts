@@ -5,7 +5,7 @@ import sharp from 'sharp' // sharp-import
 import path from 'path'
 import { buildConfig, PayloadRequest } from 'payload'
 import { fileURLToPath } from 'url'
-
+import { resendAdapter } from '@payloadcms/email-resend'
 import { Categories } from './collections/Categories'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
@@ -73,7 +73,16 @@ export default buildConfig({
   collections: [Pages, Posts, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
-  blocks: [AboutBlockConfig, BeliefsBlockConfig, ServicesBlockConfig, ClientsBlockConfig, ProcessBlockConfig, missionVisionBlockConfig, coreValuesBlockConfig, storyBlockConfig],
+  blocks: [
+    AboutBlockConfig,
+    BeliefsBlockConfig,
+    ServicesBlockConfig,
+    ClientsBlockConfig,
+    ProcessBlockConfig,
+    missionVisionBlockConfig,
+    coreValuesBlockConfig,
+    storyBlockConfig,
+  ],
   plugins: [
     ...plugins,
     s3Storage({
@@ -112,4 +121,9 @@ export default buildConfig({
     },
     tasks: [],
   },
+  email: resendAdapter({
+    defaultFromAddress: 'arvin.emazingways@gmail.com',
+    defaultFromName: 'ALLIED METALS WEBSITE',
+    apiKey: process.env.RESEND_API_KEY || '',
+  }),
 })
